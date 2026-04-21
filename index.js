@@ -12,13 +12,27 @@ const {
 
 const { createCanvas, loadImage } = require("canvas");
 
-const fs = require("fs");
+const fs = require("fs/promises");
 
-if (!fs.existsSync("./data.json")) {
-  fs.writeFileSync("./data.json", "{}");
+async function ensureDataFile() {
+  try {
+    await fs.access("./data.json");
+  } catch {
+    await fs.writeFile("./data.json", "{}");
+  }
 }
 
-let data = JSON.parse(fs.readFileSync("./data.json", "utf8"));
+let data = {};
+
+async function loadData() {
+  try {
+    const raw = await fs.readFile("./data.json", "utf8");
+    data = JSON.parse(raw);
+  } catch (err) {
+    console.error("❌ Lỗi đọc data:", err);
+    data = {};
+  }
+}
 
 const client = new Client({
   intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent, GatewayIntentBits.GuildMembers]
@@ -45,7 +59,10 @@ const GIF_SP = "https://cdn.discordapp.com/attachments/1495638864520548392/14957
 const GIF_GPT = "https://cdn.discordapp.com/attachments/1495638864520548392/1495720152132751421/4b06e393fd0647c265b1282b0f006486.gif?ex=69e74571&is=69e5f3f1&hm=8f58cb0ca6522a35f507d8e41551df79d2dfadfde81fbda3c294083b3fc8b4e3&";
 const GIF_NETFLIX = "https://cdn.discordapp.com/attachments/1495638864520548392/1495720152677748898/2d97922c558c15f8850105e0498aeafb.gif?ex=69e74571&is=69e5f3f1&hm=8c6f7cb2347d6db6ba235201a83723c53286ef779951ecb43a788faadc2ca1f6&";
 
-client.once('ready', () => {
+client.once('ready', async () => {
+  await ensureDataFile(); // tạo file nếu chưa có
+  await loadData();       // load data
+
   console.log(`🔥 ${client.user.tag} đã online`);
 });
 
@@ -349,7 +366,7 @@ data[userId].history.push({
 data[userId].orders += 1;
 data[userId].money += amount;
 
-  fs.writeFileSync("./data.json", JSON.stringify(data, null, 2));
+  await saveData();
 
 const money = data[userId].money;
 const orders = data[userId].orders;
@@ -828,3 +845,11 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log("Web server chạy");
 });
+
+async function saveData() {
+  try {
+    await fs.writeFile("./data.json", JSON.stringify(data, null, 2));
+  } catch (err) {
+    console.error("❌ Lỗi ghi data:", err);
+  }
+}
