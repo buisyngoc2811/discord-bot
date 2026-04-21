@@ -11,8 +11,8 @@
   "license": "ISC",
   "dependencies": {
     "canvas": "^3.2.3",
-    "discord.js": "^14.26.3"
+    "discord.js": "^14.26.3",
+    "express": "^5.2.1"
   },
-  "devDependencies": {},
   "type": "commonjs"
 }
