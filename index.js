@@ -51,6 +51,7 @@ const ROLE_VIP = "1496415340521979934"; // ⭐
 const ROLE_VIPPP = "1496415387103789128"; // 👑
 const VIP_CHANNEL_ID = "1411071234241859653";
 const CHECK_RANK_CHANNEL_ID = "1496414627830038668";
+const TICKET_CATEGORY_ID = "1496257188065185812";
 
 // 👉 GIF bảng giá
 const GIF = "https://cdn.discordapp.com/attachments/1495638864520548392/1495696433376919562/Paucek_and_Lage_1.gif";
@@ -688,6 +689,7 @@ setTimeout(() => {
     const channel = await interaction.guild.channels.create({
       name: `${type}-${interaction.user.username}-${interaction.user.id.slice(0,4)}`,
       type: ChannelType.GuildText,
+	  parent: TICKET_CATEGORY_ID, // 🔥 THÊM DÒNG NÀY
       permissionOverwrites: [
         { id: interaction.guild.id, deny: [PermissionsBitField.Flags.ViewChannel] },
         { id: interaction.user.id, allow: [PermissionsBitField.Flags.ViewChannel] },
