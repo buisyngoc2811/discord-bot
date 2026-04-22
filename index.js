@@ -43,14 +43,14 @@ const TOKEN = process.env.TOKEN;
 const BANNER = "https://cdn.discordapp.com/attachments/1495638864520548392/1495659302386667550/giphy_1.gif";
 const LEGIT = "https://discord.com/channels/1495637850866319390/1495638797692698654";
 
-const STAFF_ROLE_ID = "1495660645343953087";
-const LOG_CHANNEL_ID = "1495661035355377694";
-const ROLE_CUSTOMER = "1495742777261162597"; // 🛒
-const ROLE_KHACH_QUEN = "1495748595562053763"; // 💸
-const ROLE_VIP = "1495748444290285598"; // ⭐
-const ROLE_VIPPP = "1495748642206650448"; // 👑
-const VIP_CHANNEL_ID = "1495766857431646288";
-const CHECK_RANK_CHANNEL_ID = "1495775470216675359";
+const STAFF_ROLE_ID = "1496252313835274250";
+const LOG_CHANNEL_ID = "1496257258919563294";
+const ROLE_CUSTOMER = "1496413579275014234"; // 🛒
+const ROLE_KHACH_QUEN = "1496415248637362257"; // 💸
+const ROLE_VIP = "1496415340521979934"; // ⭐
+const ROLE_VIPPP = "1496415387103789128"; // 👑
+const VIP_CHANNEL_ID = "1411071234241859653";
+const CHECK_RANK_CHANNEL_ID = "1496414627830038668";
 
 // 👉 GIF bảng giá
 const GIF = "https://cdn.discordapp.com/attachments/1495638864520548392/1495696433376919562/Paucek_and_Lage_1.gif";
@@ -245,9 +245,9 @@ await message.channel.bulkDelete(10).catch(() => {});
 \u001b[1;32mNhấn Vào Mục Bên Dưới Và Chọn Sản Phẩm Bạn Cần Tham Khảo Bot Sẽ Hiện Bảng Giá Sản Phẩm Lên\u001b[0m
 \`\`\`
 
-🛒 **Mua Hàng Tại:** <#1495731009226805309>  
-🎨 **Xem Decor Tại:** <#1495708903818789014>  
-💸 **Săn Sale Tại:** <#1495708929823477841>
+🛒 **Mua Hàng Tại:** <#1421126927548158002>  
+🎨 **Xem Decor Tại:** <#1411071233482821680>  
+💸 **Săn Sale Tại:** <#1496406115649454132>
 `);
     const menu = new ActionRowBuilder().addComponents(
       new StringSelectMenuBuilder()
@@ -796,7 +796,7 @@ if (logChannel) {
 // 👉 DÁN WELCOME Ở ĐÂY
 client.on("guildMemberAdd", async (member) => {
 
-  const channel = member.guild.channels.cache.get("1495638265288458331"); // kênh welcome
+  const channel = member.guild.channels.cache.get("1496250136735514654"); // kênh welcome
 
   if (!channel) return;
 
