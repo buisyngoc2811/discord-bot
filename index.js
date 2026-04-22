@@ -59,7 +59,27 @@ const GIF_YT = "https://cdn.discordapp.com/attachments/1495638864520548392/14957
 const GIF_SP = "https://cdn.discordapp.com/attachments/1495638864520548392/1495720151595749477/276f273d11f8b9dbc0a9c55bb38ea8c6.gif?ex=69e74571&is=69e5f3f1&hm=8e793a056ac1cd462d5d8b94097363ed6bfa6bc9402a05d1f2626592399679ce&";
 const GIF_GPT = "https://cdn.discordapp.com/attachments/1495638864520548392/1495720152132751421/4b06e393fd0647c265b1282b0f006486.gif?ex=69e74571&is=69e5f3f1&hm=8f58cb0ca6522a35f507d8e41551df79d2dfadfde81fbda3c294083b3fc8b4e3&";
 const GIF_NETFLIX = "https://cdn.discordapp.com/attachments/1495638864520548392/1495720152677748898/2d97922c558c15f8850105e0498aeafb.gif?ex=69e74571&is=69e5f3f1&hm=8c6f7cb2347d6db6ba235201a83723c53286ef779951ecb43a788faadc2ca1f6&";
-
+const PRICE = {
+  yt: {
+    "1m": 40000,
+    "3m": 120000,
+    "6m": 189000,
+    "1y": 279000
+  },
+  sp: {
+    "4m": 100000,
+    "1y": 400000
+  },
+  gpt: {
+    "1m": 90000,
+    "fam": 119000
+  },
+  netflix: {
+    "3m": 220000,
+    "6m": 320000,
+    "1y": 620000
+  }
+};
 client.once('ready', async () => {
   await ensureDataFile(); // tạo file nếu chưa có
   await loadData();       // load data
@@ -554,24 +574,24 @@ client.on('interactionCreate', async interaction => {
         .setTitle("Bảng Giá Youtube Premium")
         .setThumbnail(GIF)
         .setDescription(`
-<:YouTube_23392:1495689772117655562> Youtube Premium 1 Tháng:
+Youtube Premium 1 Tháng:
 \`\`\`
-PRICE: 40.000 VND
-\`\`\`
-
-<:YouTube_23392:1495689772117655562> Youtube Premium 3 Tháng:
-\`\`\`
-PRICE: 120.000 VND
+PRICE: ${PRICE.yt["1m"].toLocaleString()} VND
 \`\`\`
 
-<:YouTube_23392:1495689772117655562> Youtube Premium 6 Tháng:
+Youtube Premium 3 Tháng:
 \`\`\`
-PRICE: 230.000 VND
+PRICE: ${PRICE.yt["3m"].toLocaleString()} VND
 \`\`\`
 
-<:YouTube_23392:1495689772117655562> Youtube Premium 1 Năm:
+Youtube Premium 6 Tháng:
 \`\`\`
-PRICE: 350.000 VND
+PRICE: ${PRICE.yt["6m"].toLocaleString()} VND
+\`\`\`
+
+Youtube Premium 1 Năm:
+\`\`\`
+PRICE: ${PRICE.yt["1y"].toLocaleString()} VND
 \`\`\`
 •  **Chỉ cần gửi email để add, không cần mật khẩu  **
 •  **Dùng lâu dài, nên mua gói 1 năm  **
@@ -584,21 +604,21 @@ PRICE: 350.000 VND
       embed = new EmbedBuilder()
         .setColor(0x1DB954)
         .setTitle("Bảng giá Spotify Premium")
-        .setDescription(`
-<:spotify_logo_icon_189218:1495689980972896296> Spotify Premium 4 Tháng:
+       .setDescription(`
+Spotify Premium 4 Tháng:
 \`\`\`
-PRICE: 100.000 VND
-\`\`\`
-
-<:spotify_logo_icon_189218:1495689980972896296> Spotify Premium 1 Năm:
-\`\`\`
-PRICE: 340.000 VND
+PRICE: ${PRICE.sp["4m"].toLocaleString()} VND
 \`\`\`
 
-• **Tài khoản chính chủ ** 
-• **Nghe nhạc không quảng cáo ** 
+Spotify Premium 1 Năm:
+\`\`\`
+PRICE: ${PRICE.sp["1y"].toLocaleString()} VND
+\`\`\`
+
+• **Tài khoản chính chủ**
+• **Nghe nhạc không quảng cáo**
 • **🔒 Bảo hành full thời gian sử dụng**
-        `)
+`)
 		.setImage(GIF_SP);
     }
 
@@ -607,14 +627,14 @@ PRICE: 340.000 VND
         .setColor(0x5865F2)
         .setTitle("Bảng giá ChatGPT Plus")
         .setDescription(`
-<:chatgpt_logo_chatgpt_logo_square:1495689844058357841> ChatGPT Plus 1 Tháng:
+ChatGPT Plus 1 Tháng:
 \`\`\`
-PRICE: 90.000 VND
+PRICE: ${PRICE.gpt["1m"].toLocaleString()} VND
 \`\`\`
 
-<:chatgpt_logo_chatgpt_logo_square:1495689844058357841> Add Fam:
+ChatGPT Plus 1 Tháng (Add Fam):
 \`\`\`
-PRICE: 119.000 VND
+PRICE: ${PRICE.gpt["fam"].toLocaleString()} VND
 \`\`\`
 
 • Sử dụng GPT-4  
@@ -629,23 +649,23 @@ PRICE: 119.000 VND
         .setColor(0xE50914)
         .setTitle("Bảng giá Netflix")
         .setDescription(`
-<:netflix_macos_bigsur_icon_189917:1495689454210514984> Netflix 3 Tháng:
+Netflix 3 Tháng:
 \`\`\`
-PRICE: 220.000 VND
-\`\`\`
-
-<:netflix_macos_bigsur_icon_189917:1495689454210514984> Netflix 6 Tháng:
-\`\`\`
-PRICE: 320.000 VND
+PRICE: ${PRICE.netflix["3m"].toLocaleString()} VND
 \`\`\`
 
-<:netflix_macos_bigsur_icon_189917:1495689454210514984> Netflix 1 Năm:
+Netflix 6 Tháng:
 \`\`\`
-PRICE: 620.000 VND
+PRICE: ${PRICE.netflix["6m"].toLocaleString()} VND
 \`\`\`
 
-• **Tài khoản Premium ** 
-• **Xem 4K, nhiều thiết bị ** 
+Netflix 1 Năm:
+\`\`\`
+PRICE: ${PRICE.netflix["1y"].toLocaleString()} VND
+\`\`\`
+
+• **Tài khoản Premium**
+• **Xem 4K, nhiều thiết bị**
 • **🔒 Bảo hành full**
 `)
 		.setImage(GIF_NETFLIX)
