@@ -41,7 +41,7 @@ const client = new Client({
 const TOKEN = process.env.TOKEN;
 
 const BANNER = "https://cdn.discordapp.com/attachments/1495638864520548392/1495659302386667550/giphy_1.gif";
-const LEGIT = "https://discord.com/channels/1495637850866319390/1495638797692698654";
+const LEGIT = "https://discord.com/channels/1411071233050808444/1496247370365669597";
 
 const STAFF_ROLE_ID = "1496252313835274250";
 const LOG_CHANNEL_ID = "1496257258919563294";
