@@ -193,7 +193,7 @@ client.on('messageCreate', async (message) => {
       .setColor(0x5865F2)
       .setImage(BANNER)
       .setDescription(`
-# ⭐ 36 STORE
+# ⭐ MEO STORE
 
 ━━━━━━━━━━━━━━━
 
@@ -207,7 +207,7 @@ client.on('messageCreate', async (message) => {
 
 > 🚫 Vui lòng không spam ticket
       `)
-      .setFooter({ text: "36 STORE • Uy tín - Nhanh chóng" })
+      .setFooter({ text: "MEO STORE • Uy tín - Nhanh chóng" })
       .setTimestamp();
 
     const row = new ActionRowBuilder().addComponents(
@@ -237,7 +237,7 @@ client.on('messageCreate', async (message) => {
 await message.channel.bulkDelete(10).catch(() => {});
     const embed = new EmbedBuilder()
       .setColor(0x57F287)
-      .setTitle("💎 BẢNG GIÁ 36 STORE")
+      .setTitle("💎 BẢNG GIÁ MEO STORE")
       .setThumbnail("https://cdn.discordapp.com/attachments/1495638864520548392/1495705466674614373/Paucek_and_Lage_2.gif?ex=69e737c4&is=69e5e644&hm=101f55b1b9c7deda0c3aefd4b09423e34b700aedfccf3ec15913384352ba1796&")
       .setImage("https://cdn.discordapp.com/attachments/1495638864520548392/1495713187826368663/3aa46f5701fc6ed92234ea0a9f86e2cd.gif?ex=69e73ef4&is=69e5ed74&hm=8d086ce0636f2c9b81277ab547a28af0cc394186b3ebee5bec91b8f6756fda47&")
      .setDescription(`
@@ -708,7 +708,7 @@ setTimeout(() => {
   content: `
 👋 Xin chào quý khách ${interaction.user}
 
-Cảm ơn bạn đã tin tưởng 36 STORE 💙  
+Cảm ơn bạn đã tin tưởng MEO STORE 💙  
 Đội ngũ chúng mình luôn sẵn sàng hỗ trợ bạn nhanh nhất có thể!
 
 Vui lòng mô tả nhu cầu hoặc vấn đề của bạn bên dưới, staff sẽ phản hồi trong vài phút ⏱
@@ -804,7 +804,7 @@ client.on("guildMemberAdd", async (member) => {
     .setColor(0x5865F2)
     .setThumbnail("https://cdn.discordapp.com/attachments/1495638864520548392/1495658367547478137/giphy.gif?ex=69e70be6&is=69e5ba66&hm=d1252dd0d3fb42c7286cd734548583cb85fe220ff5973496b3fa013607e04d68&") // 👉 thay logo nếu muốn
     .setDescription(`
-# 💎 36 STORE
+# 💎 MEO STORE
 
 👋 **Chào mừng ${member} đến với server!**
 
@@ -826,7 +826,7 @@ client.on("guildMemberAdd", async (member) => {
 💙 *Uy tín – Nhanh chóng – Giá tốt*
 `)
     .setImage("https://cdn.discordapp.com/attachments/1495638864520548392/1495738324026134589/b34bd0ef85660338e6082332e0d31a7f.gif?ex=69e7565d&is=69e604dd&hm=0b8332d9552b46c43a9d9c0c5e6ee882c2cfb9337499496ac0149013888e31ae&") // 👉 đổi gif nếu muốn
-    .setFooter({ text: "36 STORE • Official System" });
+    .setFooter({ text: "MEO STORE • Official System" });
 
   channel.send({ embeds: [embed] });
 });
