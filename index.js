@@ -238,7 +238,7 @@ await message.channel.bulkDelete(10).catch(() => {});
     const embed = new EmbedBuilder()
       .setColor(0x57F287)
       .setTitle("💎 BẢNG GIÁ MEO STORE")
-      .setThumbnail("https://cdn.discordapp.com/attachments/1495638864520548392/1495705466674614373/Paucek_and_Lage_2.gif?ex=69e737c4&is=69e5e644&hm=101f55b1b9c7deda0c3aefd4b09423e34b700aedfccf3ec15913384352ba1796&")
+      .setThumbnail("https://cdn.discordapp.com/attachments/1411071233482821677/1496422860082905128/meo_store.gif?ex=69e9d3e4&is=69e88264&hm=457891cde44b67a3c27a62f92b162185388d94dd1e749c2966113bf5eff95690&")
       .setImage("https://cdn.discordapp.com/attachments/1495638864520548392/1495713187826368663/3aa46f5701fc6ed92234ea0a9f86e2cd.gif?ex=69e73ef4&is=69e5ed74&hm=8d086ce0636f2c9b81277ab547a28af0cc394186b3ebee5bec91b8f6756fda47&")
      .setDescription(`
 \`\`\`ansi
