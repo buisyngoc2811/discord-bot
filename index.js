@@ -888,7 +888,7 @@ client.on("guildMemberAdd", async (member) => {
 
 client.login(process.env.TOKEN);
 
-const fetch = require("node-fetch");
+const fetch = global.fetch;
 const express = require("express");
 const app = express();
 
