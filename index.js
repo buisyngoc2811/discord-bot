@@ -39,7 +39,7 @@ const client = new Client({
 });
 
 const TOKEN = process.env.TOKEN;
-
+const cooldown = new Map();
 const BANNER = "https://cdn.discordapp.com/attachments/1496891880347009194/1496893915289092177/f15055a8-9a63-4755-a4d5-1097d9bcc629.png?ex=69eb8a98&is=69ea3918&hm=bcf0aa0a81e74a3b964b398b466b6e718e8637b967d235421262fc26fe538952&";
 const LEGIT = "https://discord.com/channels/1411071233050808444/1496247370365669597";
 
@@ -103,10 +103,7 @@ Nhấn nút bên dưới để xác minh tài khoản
     .setFooter({ text: "MEO STORE • Verify System" });
 
   const row = new ActionRowBuilder().addComponents(
-    new ButtonBuilder()
-      .setCustomId("verify")
-      .setLabel("✅ Verify Member")
-      .setStyle(ButtonStyle.Success)
+    
   );
 
   message.channel.send({
@@ -714,6 +711,23 @@ setTimeout(() => {
   // ================= TICKET (GIỮ NGUYÊN) =================
   if (!interaction.isButton()) return;
 	if (interaction.customId === "verify") {
+
+  const userId = interaction.user.id;
+
+  // 🔥 CHECK SPAM
+  if (cooldown.has(userId)) {
+    return interaction.reply({
+      content: "⏳ Bạn vừa bấm rồi, đợi 10 giây nhé!",
+      ephemeral: true
+    });
+  }
+
+  // 🔥 SET COOLDOWN
+  cooldown.set(userId, true);
+
+  setTimeout(() => {
+    cooldown.delete(userId);
+  }, 10000); // 10 giây
 
   const verifyURL = "https://discord-bot-eaqk.onrender.com/verify";
 
