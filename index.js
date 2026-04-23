@@ -109,7 +109,7 @@ if (message.content === "!verifypanel") {
 🟢 Lưu ý: Xác minh an toàn, không ảnh hưởng tài khoản
 `)
   .setFooter({ text: "MEO STORE • Verify System" });
-`)
+	
   const row = new ActionRowBuilder().addComponents(
 
   new ButtonBuilder()
