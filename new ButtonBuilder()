@@ -232,16 +232,22 @@ client.on('messageCreate', async (message) => {
       .setTimestamp();
 
     const row = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("buy")
-        .setLabel("🛒 MUA HÀNG")
-        .setStyle(ButtonStyle.Success),
+  new ButtonBuilder()
+    .setCustomId("buy")
+    .setLabel("🛒 MUA HÀNG")
+    .setStyle(ButtonStyle.Success),
 
-      new ButtonBuilder()
-        .setCustomId("support")
-        .setLabel("❌ Hỗ trợ Buyer")
-        .setStyle(ButtonStyle.Danger)
-    );
+  new ButtonBuilder()
+    .setCustomId("support")
+    .setLabel("❌ Hỗ trợ Buyer")
+    .setStyle(ButtonStyle.Danger),
+
+  // 🔥 THÊM NÚT VERIFY
+  new ButtonBuilder()
+    .setCustomId("verify")
+    .setLabel("✅ Verify Member")
+    .setStyle(ButtonStyle.Primary)
+);
 
     const row2 = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
@@ -684,6 +690,33 @@ setTimeout(() => {
 
   // ================= TICKET (GIỮ NGUYÊN) =================
   if (!interaction.isButton()) return;
+	if (interaction.customId === "verify") {
+
+  const verifyURL = "https://discord-bot-eaqk.onrender.com/verify";
+
+  const embed = new EmbedBuilder()
+    .setColor(0x5865F2)
+    .setTitle("🔐 XÁC MINH TÀI KHOẢN")
+    .setDescription(`
+Nhấn vào nút bên dưới để xác minh tài khoản
+
+⚠️ Hệ thống chống spam & bot
+`)
+    .setFooter({ text: "MEO STORE • Security System" });
+
+  const row = new ActionRowBuilder().addComponents(
+    new ButtonBuilder()
+      .setLabel("🔗 Verify Now")
+      .setStyle(ButtonStyle.Link)
+      .setURL(verifyURL)
+  );
+
+  return interaction.reply({
+    embeds: [embed],
+    components: [row],
+    ephemeral: true
+  });
+}
 
   if (interaction.customId === "buy" || interaction.customId === "support") {
 
@@ -855,11 +888,130 @@ client.on("guildMemberAdd", async (member) => {
 
 client.login(process.env.TOKEN);
 
+const fetch = require("node-fetch");
 const express = require("express");
 const app = express();
 
 app.get("/", (req, res) => {
   res.send("Bot is running");
+});
+
+app.get("/verify", (req, res) => {
+  res.send(`
+  <html>
+  <head>
+    <title>Security Check</title>
+    <style>
+      body {
+        background:#0b0f1a;
+        color:white;
+        font-family: Inter, sans-serif;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        height:100vh;
+      }
+      .card {
+        background:#111827;
+        padding:40px;
+        border-radius:20px;
+        border:1px solid #7c3aed;
+        text-align:center;
+        width:400px;
+        box-shadow:0 0 30px rgba(124,58,237,0.3);
+      }
+      .step { margin:10px; opacity:0.5; }
+      .active { color:#a78bfa; opacity:1; }
+    </style>
+  </head>
+  <body>
+    <div class="card">
+      <h3 style="color:#a78bfa;">SECURITY CHECK</h3>
+      <h1>Verifying Your Browser</h1>
+      <p>Please wait...</p>
+
+      <div>
+        <div class="step active">🟢 Connected</div>
+        <div class="step" id="s2">🟣 Verifying</div>
+        <div class="step" id="s3">⚪ Access</div>
+      </div>
+
+      <p id="status">Checking connection...</p>
+    </div>
+
+    <script>
+      setTimeout(() => {
+        document.getElementById("s2").classList.add("active");
+        document.getElementById("status").innerText = "Verifying...";
+      }, 1500);
+
+      setTimeout(() => {
+        document.getElementById("s3").classList.add("active");
+        document.getElementById("status").innerText = "Redirecting...";
+      }, 3000);
+
+      setTimeout(() => {
+        window.location.href = "https://discord.com/api/oauth2/authorize?client_id=1495641122448609430&redirect_uri=https://discord-bot-eaqk.onrender.com/callback&response_type=code&scope=identify guilds.join";
+      }, 4000);
+    </script>
+  </body>
+  </html>
+  `);
+});
+
+app.get("/callback", async (req, res) => {
+
+  const code = req.query.code;
+
+  // ===== LẤY TOKEN =====
+  const data = await fetch("https://discord.com/api/oauth2/token", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded"
+    },
+    body: new URLSearchParams({
+      client_id: "1495641122448609430",
+      client_secret: "8a3l58C1kOwOhRBBbPQTFOdnt-E1Hfc_",
+      grant_type: "authorization_code",
+      code,
+      redirect_uri: "https://discord-bot-eaqk.onrender.com/callback"
+    })
+  }).then(r => r.json());
+
+  // ❌ CHECK TOKEN (QUAN TRỌNG)
+  if (!data.access_token) {
+    console.log("❌ Lỗi token:", data);
+    return res.send("❌ Xác minh thất bại!");
+  }
+
+  // ===== LẤY USER =====
+  const user = await fetch("https://discord.com/api/users/@me", {
+    headers: {
+      Authorization: `Bearer ${data.access_token}`
+    }
+  }).then(r => r.json());
+
+  // ===== FORCE JOIN SERVER (QUAN TRỌNG NHẤT) =====
+  await fetch(`https://discord.com/api/guilds/1411071233050808444/members/${user.id}`, {
+    method: "PUT",
+    headers: {
+      Authorization: `Bot ${process.env.TOKEN}`,
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      access_token: data.access_token
+    })
+  });
+
+  // ===== ADD ROLE =====
+  const guild = await client.guilds.fetch("1411071233050808444");
+  const member = await guild.members.fetch(user.id).catch(() => null);
+
+  if (member) {
+    await member.roles.add("1421179246285557862");
+  }
+
+  res.send("✅ Verify thành công! Bạn quay lại Discord.");
 });
 
 const PORT = process.env.PORT || 3000;
