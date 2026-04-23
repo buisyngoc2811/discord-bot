@@ -93,18 +93,40 @@ client.on('messageCreate', async (message) => {
 if (message.content === "!verifypanel") {
 
   const embed = new EmbedBuilder()
-    .setColor(0x5865F2)
-    .setTitle("🔐 XÁC MINH TÀI KHOẢN")
-    .setDescription(`
-Nhấn nút bên dưới để xác minh tài khoản
+  .setColor(0x2f3136)
+  .setImage(BANNER)
+  .setDescription(`
+# 🔥 BRZONE BACKUP
+
+\`\`\`ansi
+\u001b[1;33mBước 1:\u001b[0m Nhấn nút \u001b[1;32m[Verify Member]\u001b[0m bên dưới
+
+\u001b[1;35mBước 2:\u001b[0m Hệ thống sẽ hiện bảng \u001b[1;36m[Ủy Quyền]\u001b[0m
+
+\u001b[1;34mBước 3:\u001b[0m Chọn \u001b[1;31m[Phê duyệt]\u001b[0m để hoàn tất
+\`\`\`
+
+🟢 **Lưu ý:** Xác minh an toàn, không ảnh hưởng tài khoản
+  `)
+  .setFooter({ text: "MEO STORE • Verify System" });
 
 ⚠️ Bắt buộc để xem tất cả kênh
 `)
     .setFooter({ text: "MEO STORE • Verify System" });
 
   const row = new ActionRowBuilder().addComponents(
-    
-  );
+
+  new ButtonBuilder()
+    .setCustomId("verify")
+    .setLabel("✔ Verify Member")
+    .setStyle(ButtonStyle.Success),
+
+  new ButtonBuilder()
+    .setLabel("❓ Tại Sao Phải Verify?")
+    .setStyle(ButtonStyle.Secondary)
+    .setURL("https://discord.com")
+
+);
 
   message.channel.send({
     embeds: [embed],
