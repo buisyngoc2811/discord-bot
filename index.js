@@ -109,8 +109,6 @@ if (message.content === "!verifypanel") {
 🟢 Lưu ý: Xác minh an toàn, không ảnh hưởng tài khoản
 `)
   .setFooter({ text: "MEO STORE • Verify System" });
-
-⚠️ Bắt buộc để xem tất cả kênh
 `)
   const row = new ActionRowBuilder().addComponents(
 
