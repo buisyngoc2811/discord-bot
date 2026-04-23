@@ -1008,7 +1008,7 @@ app.get("/callback", async (req, res) => {
   const member = await guild.members.fetch(user.id).catch(() => null);
 
   if (member) {
-    await member.roles.add("1421179246285557862");
+    await member.roles.add("1411071233050808445");
   }
 
   res.send("✅ Verify thành công! Bạn quay lại Discord.");
