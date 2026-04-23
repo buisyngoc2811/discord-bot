@@ -119,7 +119,7 @@ if (message.content === "!verifypanel") {
 
   new ButtonBuilder()
     .setLabel("❓ Tại Sao Phải Verify?")
-    .setStyle(ButtonStyle.Secondary)
+    .setStyle(ButtonStyle.Link)
     .setURL("https://discord.com")
 
 );
