@@ -90,7 +90,30 @@ client.once('ready', async () => {
 // ================= PANEL =================
 client.on('messageCreate', async (message) => {
 	
+if (message.content === "!verifypanel") {
 
+  const embed = new EmbedBuilder()
+    .setColor(0x5865F2)
+    .setTitle("🔐 XÁC MINH TÀI KHOẢN")
+    .setDescription(`
+Nhấn nút bên dưới để xác minh tài khoản
+
+⚠️ Bắt buộc để xem tất cả kênh
+`)
+    .setFooter({ text: "MEO STORE • Verify System" });
+
+  const row = new ActionRowBuilder().addComponents(
+    new ButtonBuilder()
+      .setCustomId("verify")
+      .setLabel("✅ Verify Member")
+      .setStyle(ButtonStyle.Success)
+  );
+
+  message.channel.send({
+    embeds: [embed],
+    components: [row]
+  });
+}
 
   // 🔒 chỉ staff dùng
  if (message.content.startsWith("!donhang")) {
