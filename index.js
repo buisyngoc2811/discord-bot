@@ -40,7 +40,7 @@ const client = new Client({
 
 const TOKEN = process.env.TOKEN;
 
-const BANNER = "https://cdn.discordapp.com/attachments/1421126927548158002/1496890966186135552/ChatGPT_Image_Apr_23_2026_10_09_10_PM.png?ex=69eb87d9&is=69ea3659&hm=57d7984c6efe97d2710164a3c1e4c80f1b649b97890563e479cbfdc9262b1b15&";
+const BANNER = "https://cdn.discordapp.com/attachments/1496891880347009194/1496893915289092177/f15055a8-9a63-4755-a4d5-1097d9bcc629.png?ex=69eb8a98&is=69ea3918&hm=bcf0aa0a81e74a3b964b398b466b6e718e8637b967d235421262fc26fe538952&";
 const LEGIT = "https://discord.com/channels/1411071233050808444/1496247370365669597";
 
 const STAFF_ROLE_ID = "1496252313835274250";
