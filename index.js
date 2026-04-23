@@ -106,14 +106,12 @@ if (message.content === "!verifypanel") {
 \u001b[1;34mBước 3:\u001b[0m Chọn \u001b[1;31m[Phê duyệt]\u001b[0m để hoàn tất
 \`\`\`
 
-🟢 **Lưu ý:** Xác minh an toàn, không ảnh hưởng tài khoản
-  `)
+🟢 Lưu ý: Xác minh an toàn, không ảnh hưởng tài khoản
+`)
   .setFooter({ text: "MEO STORE • Verify System" });
 
 ⚠️ Bắt buộc để xem tất cả kênh
 `)
-    .setFooter({ text: "MEO STORE • Verify System" });
-
   const row = new ActionRowBuilder().addComponents(
 
   new ButtonBuilder()
