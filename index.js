@@ -901,59 +901,151 @@ app.get("/verify", (req, res) => {
   <html>
   <head>
     <title>Security Check</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap" rel="stylesheet">
     <style>
       body {
-        background:#0b0f1a;
-        color:white;
-        font-family: Inter, sans-serif;
+        margin:0;
+        height:100vh;
         display:flex;
         justify-content:center;
         align-items:center;
-        height:100vh;
+        background: radial-gradient(circle at top, #0f172a, #020617);
+        font-family: 'Inter', sans-serif;
+        color:white;
       }
+
       .card {
-        background:#111827;
+        width:420px;
         padding:40px;
         border-radius:20px;
-        border:1px solid #7c3aed;
+        background: rgba(17,24,39,0.8);
+        backdrop-filter: blur(10px);
+        border:1px solid rgba(124,58,237,0.5);
+        box-shadow: 0 0 40px rgba(124,58,237,0.3);
         text-align:center;
-        width:400px;
-        box-shadow:0 0 30px rgba(124,58,237,0.3);
+        animation: fadeIn 0.8s ease;
       }
-      .step { margin:10px; opacity:0.5; }
-      .active { color:#a78bfa; opacity:1; }
+
+      @keyframes fadeIn {
+        from {opacity:0; transform: translateY(20px);}
+        to {opacity:1; transform: translateY(0);}
+      }
+
+      h3 {
+        color:#a78bfa;
+        letter-spacing:1px;
+        font-size:14px;
+      }
+
+      h1 {
+        font-size:26px;
+        margin:10px 0;
+      }
+
+      .steps {
+        margin-top:25px;
+        text-align:left;
+      }
+
+      .step {
+        margin:10px 0;
+        display:flex;
+        align-items:center;
+        opacity:0.4;
+        transition:0.3s;
+      }
+
+      .step.active {
+        opacity:1;
+        color:#a78bfa;
+      }
+
+      .dot {
+        width:10px;
+        height:10px;
+        border-radius:50%;
+        margin-right:10px;
+        background:#555;
+      }
+
+      .active .dot {
+        background:#a78bfa;
+        box-shadow:0 0 10px #a78bfa;
+      }
+
+      #status {
+        margin-top:20px;
+        color:#9ca3af;
+        font-size:14px;
+      }
+
+      .spinner {
+        margin:20px auto;
+        width:40px;
+        height:40px;
+        border:3px solid rgba(255,255,255,0.1);
+        border-top:3px solid #a78bfa;
+        border-radius:50%;
+        animation: spin 1s linear infinite;
+      }
+
+      @keyframes spin {
+        to { transform: rotate(360deg); }
+      }
+
     </style>
   </head>
+
   <body>
     <div class="card">
-      <h3 style="color:#a78bfa;">SECURITY CHECK</h3>
+      <h3>SECURITY CHECK</h3>
       <h1>Verifying Your Browser</h1>
-      <p>Please wait...</p>
 
-      <div>
-        <div class="step active">🟢 Connected</div>
-        <div class="step" id="s2">🟣 Verifying</div>
-        <div class="step" id="s3">⚪ Access</div>
+      <div class="spinner"></div>
+
+      <div class="steps">
+        <div class="step active" id="s1"><div class="dot"></div>Connected</div>
+        <div class="step" id="s2"><div class="dot"></div>Verifying</div>
+        <div class="step" id="s3"><div class="dot"></div>Access</div>
       </div>
 
-      <p id="status">Checking connection...</p>
+      <div id="status">Checking connection...</div>
     </div>
 
-    <script>
-      setTimeout(() => {
-        document.getElementById("s2").classList.add("active");
-        document.getElementById("status").innerText = "Verifying...";
-      }, 1500);
+   <script>
+  const status = document.getElementById("status");
 
-      setTimeout(() => {
-        document.getElementById("s3").classList.add("active");
-        document.getElementById("status").innerText = "Redirecting...";
-      }, 3000);
+  const messages = [
+    "Checking connection...",
+    "Scanning browser...",
+    "Validating request...",
+    "Encrypting session...",
+    "Finalizing..."
+  ];
 
-      setTimeout(() => {
-        window.location.href = "https://discord.com/api/oauth2/authorize?client_id=1495641122448609430&redirect_uri=https://discord-bot-eaqk.onrender.com/callback&response_type=code&scope=identify guilds.join";
-      }, 4000);
-    </script>
+  let i = 0;
+
+  const interval = setInterval(() => {
+    status.innerText = messages[i];
+    i++;
+
+    if (i >= messages.length) {
+      clearInterval(interval);
+    }
+  }, 800);
+
+  setTimeout(() => {
+    document.getElementById("s2").classList.add("active");
+  }, 1500);
+
+  setTimeout(() => {
+    document.getElementById("s3").classList.add("active");
+  }, 3000);
+
+  setTimeout(() => {
+    window.location.href = "https://discord.com/api/oauth2/authorize?client_id=1495641122448609430&redirect_uri=https://discord-bot-eaqk.onrender.com/callback&response_type=code&scope=identify guilds.join";
+  }, 4500);
+</script>
   </body>
   </html>
   `);
